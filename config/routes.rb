@@ -1,12 +1,13 @@
 Login::Application.routes.draw do
-   root to: "users#welcome"
-  get "login" => "users#login", :as => "login"
-get "weibologin" => "users#weibologin", :as => "weibologin"
-get "callback" => "users#callback", :as => "callback"
-  get "signup" => "users#signup", :as => "signup"
-  post "create_login_session" => "users#create_login_session"
-  delete "logout" => "users#logout", :as => "logout"
-  resources :users, only: [:create]
+    root to: "users#welcome"
+    get "login" => "users#login", :as => "login"
+    get "weibologin" => "users#weibologin", :as => "weibologin"
+    get "callback" => "users#callback", :as => "callback"
+    get "signup" => "users#signup", :as => "signup"
+    post "create_login_session" => "users#create_login_session"
+    delete "logout" => "users#logout", :as => "logout"
+    resources :users, only: [:create]
+    resources :posts
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

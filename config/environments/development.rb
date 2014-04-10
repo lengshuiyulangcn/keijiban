@@ -35,6 +35,6 @@ Login::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   WeiboOAuth2::Config.api_key = ""
-WeiboOAuth2::Config.api_secret = ""
-WeiboOAuth2::Config.redirect_uri = ""
+  WeiboOAuth2::Config.api_secret = ""
+  WeiboOAuth2::Config.redirect_uri = ""
 end

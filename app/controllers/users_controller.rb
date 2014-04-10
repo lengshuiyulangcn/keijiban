@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def welcome
-    login_needed
+    #login_needed
   end
 
   def signup

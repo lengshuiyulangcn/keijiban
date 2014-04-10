@@ -1,0 +1,34 @@
+<div class="single-form-container">
+  <div class="boxed-group" id="post">
+    <h3>发表新日志</h3>
+    <div class="boxed-group-inner">
+      <%= form_for @post do |p|%>
+        <dl class="form">
+          <dt>
+         <%= label_tag "标题" %>
+          </dt>
+          <dd>
+          <%= p.text_field :title%>
+          </dd>
+        </dl>
+        <dl class="form">
+          <dt>
+          <%= label_tag "分类" %>
+          </dt>
+          <dd>
+          <%= p.text_field :type%>
+          </dd>
+        </dl>
+        <dl class="form">
+          <dt>
+          <%= label_tag "正文" %>
+          </dt>
+          <dd>
+          <%= p.text_area :content%>
+          </dd>
+        </dl>
+        <p> <%= submit_tag "提交", :class => "button primary" %> </p>
+      <% end %>
+    </div>
+  </div>
+</div>
