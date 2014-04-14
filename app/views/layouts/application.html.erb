@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Login" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "冷水的喵窝" %></title>
     <%= csrf_meta_tags %>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -36,7 +36,7 @@
 
     <%= javascript_include_tag "application" %>
   </head>
-  <body>
+  <body　background="vendor/assets/pic/nijihaikei.jpg">
 
     <div class="navbar navbar-fluid-top">
       <div class="navbar-inner">
@@ -46,13 +46,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/">Login</a>
+          <a class="brand" href="/">冷水的喵窝ε≅(◌∀◌)</a>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
-              <% if current_user %>
-        <li><%= link_to current_user.name %></li>
-        <li><%=link_to "写日志",new_post_path%></li>
-        <li><%= link_to "退出", logout_path, method: "delete" %></li>
+              <% if is_admin %>
+                <li><%= link_to current_user.name %></li>
+                <li><%=link_to "写日志",new_post_path%></li>
+                <li><%=link_to "日志管理",posts_path%></li>
+                <li><%= link_to "退出", logout_path, method: "delete" %></li>
+              <%elsif current_user%>
+              <li><%= link_to current_user.name %></li>
+              <li><%= link_to "退出", logout_path, method: "delete" %></li>
               <%else%>
               <li><%= link_to "登录", "/login"  %></li>
               <li><%= link_to "注册", "/signup"  %></li>
@@ -63,14 +67,39 @@
         </div>
       </div>
     </div>
+      <div class="container-fluid" style="background-color: rgb(233,233,233);">
+        <div class="row-fluid">
         <div class="span9">
           <%= bootstrap_flash %>
           <%= yield %>
-          <%="管理人：#{ENV["ADMIN"]}"%>
+        </div>
+        <div class="span2">
+          <a href="http://49.212.212.212/imagehost/?pm=3PQB" title="QQ截图20130924221510" ><img src="http://49.212.212.212/imagehost/image.php?dm=3PQB" alt="QQ截图20130924221510" /></a>
+          <h3>About</h3>
+          <%=ENV["ABOUT"]%>
+            <h4>职业</h4>
+          <%=ENV["INTRODUCTION"]%>
+            <h4>兴趣</h4>
+          <%=ENV["INTEREST"]%>
+          <h3>近期文章</h3>
+          <%posts=Post.all(:order => 'created_at DESC', :limit => 10)%>
+            <ul>
+            <%posts.each do |p|%>
+            <li><%=link_to p.title, post_path(p.id)%></li>
+            <%end%>
+          </ul>
+          <h3>分类</h3>
+          <ul>
+          <li><%=link_to "机器学习", "/ml"%></li>
+          <li><%=link_to "Ruby", "/ruby"%></li>
+          <li><%=link_to "闲言碎语", "/talk"%></li>
+          <li><%=link_to "关于爱情", "/love"%></li>
+        </ul>
+         
+        </div>
+      </div>
         </div>
       </div><!--/row-->
-
     </div> <!-- /container -->
-
   </body>
 </html>

@@ -1,3 +1,4 @@
+#encoding:utf-8
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -10,5 +11,19 @@ class ApplicationController < ActionController::Base
   	end
   end
 
-  helper_method :current_user,:login_needed
+  def is_admin
+    if current_user and current_user.name==ENV["ADMIN"]
+      return true
+    else
+      return false
+    end
+  end
+   def format_time(time)
+    time.strftime("%Y-%m-%d %H:%M")
+  end
+
+  def format_date(time)
+    time.strftime("%Y.%m.%d")
+  end
+  helper_method :current_user,:login_needed, :is_admin, :format_date, :format_time
 end

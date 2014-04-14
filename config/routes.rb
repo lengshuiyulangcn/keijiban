@@ -7,7 +7,9 @@ Login::Application.routes.draw do
     post "create_login_session" => "users#create_login_session"
     delete "logout" => "users#logout", :as => "logout"
     resources :users, only: [:create]
+    resources :comments, except: [:index]
     resources :posts
+    get '/:type' => 'users#welcome'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

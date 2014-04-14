@@ -1,2 +1,21 @@
-<h1></h1>
-<p>Welcome</p>
+<center><h1><%=@tag%></h1></center>
+<%@posts.each do |p|%>
+<div class="container-fluid span11" style="background-color: #F5DEB3;">
+<h3><%=link_to p.title, post_path(p.id)%></h3>
+发表于:<%=format_time(p.created_at)%>
+<br>
+<br>
+<br>
+<%=p.sub_content.html_safe%>
+<br>
+发表在:<%=p.tag%>
+<br>
+阅览人数:<%=p.visit_count%>
+<br>
+<%=link_to "阅读全文 >>", post_path(p.id)%>
+<hr>
+</div>
+<%end%>
+<div class="container-fluid span11" style="background-color: #F5DEB3;">
+<%=link_to "查看全部", "/total"%>
+</div>

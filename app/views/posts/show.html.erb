@@ -1,0 +1,39 @@
+<center><h2><%=@post.title%></h2></center>
+<center>
+发布时间：
+<%=format_time(@post.created_at)%>
+分类：
+<%=@post.tag%>
+</center>
+<div class="container span11">
+<br>
+<br>
+<br>
+<%=@post.content_html.html_safe%>
+<br>
+阅览人数:<%=@post.visit_count%>
+<hr>
+<% if @prev%>
+<%=link_to "前一篇", post_path(@prev.id)%>
+<%end%>
+<% if @next%>
+<%=link_to "下一篇", post_path(@next.id)%>
+<%end%>
+</div>
+<div class="container span8" style="background-color: #F5DEB3;">
+	<% @post.comments.each do |comment|  %>
+		<%=comment.user.name%>在<%=format_date(comment.created_at)%>发表评论:
+		<br>
+		<br>
+			<%=comment.content_html.html_safe%>
+		<hr>
+	<%end%>
+</div>
+<div class="container span11">
+<%= simple_form_for @comment do |f| %>
+  <%= f.input :content, as: :text, label: '评论内容:(支持markdown) ', :input_html => { :class => "span6" }%>
+  <br>
+  <%=f.input :post_id, :as => :hidden, :input_html => { :value => @post.id }%>
+  <%= f.button :submit, '提交', :class =>'btn-primary'%>
+<% end %>
+</div>

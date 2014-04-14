@@ -4,10 +4,14 @@ gem 'rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem 'rouge'
 gem 'sqlite3'
 gem "weibo_2"
 gem 'figaro'
+gem 'simple_form'
+gem 'strong_parameters'
+gem 'html_truncator'
+gem 'redcarpet'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

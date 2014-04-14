@@ -1,6 +1,19 @@
+#encoding:utf-8
 class UsersController < ApplicationController
   def welcome
     #login_needed
+    @posts=Post.all(:order => 'created_at DESC', :limit => 5)
+    tag = map[params[:type]]
+     if tag
+      @posts = Post.where(tag: tag).order('created_at DESC').limit(5)
+      @tag = tag
+    elsif params[:type]=="total"
+      @posts=Post.all
+      @tag="全部日志"
+    else
+      @tag="最近发表"
+      @posts
+    end
   end
 
   def signup
@@ -64,5 +77,14 @@ class UsersController < ApplicationController
     else
       render :signup
     end
+  end
+   private
+  def map
+  {
+    "ml" => "机器学习",
+    "ruby" => "Ruby",
+    "talk" => "闲言碎语",
+    "love" => "关于爱情"
+  }
   end
 end
