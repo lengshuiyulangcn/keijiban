@@ -6,5 +6,7 @@
   <br>
   <%= f.input :content, as: :text, label: '正文: ', :input_html => { :class => "span6" }%>
   <br>
+<%= f.input :auth, :as=> :boolean, :value=>1, label:'是否需要登录'%>
+  <br>
   <%= f.button :submit, '提交', :class =>'btn-primary'%>
 <% end %>

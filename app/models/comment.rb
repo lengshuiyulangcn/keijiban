@@ -11,4 +11,7 @@ class Comment < ActiveRecord::Base
     md = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, fenced_code_blocks: true)
     md.render(content)
   end
+   def k_render(content)
+	kramdown::Document.new(content).to_html
+   end
 end

@@ -6,9 +6,13 @@
 <br>
 <br>
 <br>
+<%if p.auth==0 or current_user%>
 <%=p.sub_content.html_safe%>
+<%else%>
+<%=link_to "需要登录后才能查看",login_path%>
+<%end%>
 <br>
-发表在:<%=p.tag%>
+发表在:<%=link_to p.tag, tag_path(p.tag)%>
 <br>
 阅览人数:<%=p.visit_count%>
 <br>

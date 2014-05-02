@@ -9,7 +9,7 @@ Login::Application.routes.draw do
     resources :users, only: [:create]
     resources :comments, except: [:index]
     resources :posts
-    get '/:type' => 'users#welcome'
+    get ':type' => 'users#welcome', :as=>"tag"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

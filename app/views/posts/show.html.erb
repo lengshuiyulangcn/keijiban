@@ -9,7 +9,11 @@
 <br>
 <br>
 <br>
+<%if @post.auth==0 or current_user%>
 <%=@post.content_html.html_safe%>
+<%else%>
+<h3><%=link_to "需要登录以后放可查看",login_path%></h3>
+<%end%>
 <br>
 阅览人数:<%=@post.visit_count%>
 <hr>

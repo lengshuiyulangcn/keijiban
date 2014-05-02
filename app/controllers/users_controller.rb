@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   def welcome
     #login_needed
     @posts=Post.all(:order => 'created_at DESC', :limit => 5)
-    tag = map[params[:type]]
+    tag = params[:type]
      if tag
       @posts = Post.where(tag: tag).order('created_at DESC').limit(5)
       @tag = tag

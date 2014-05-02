@@ -13,7 +13,7 @@ class PostsController < ApplicationController
 	end
 	def update
 		@post = Post.find( params[:id] )
-		if @post.update_attributes(params[:post].permit(:title,:content,:tag))
+		if @post.update_attributes(params[:post].permit(:title,:content,:tag,:auth))
       	flash[:notice] = '更新博客成功'
       	redirect_to :root
     	else
@@ -30,8 +30,7 @@ class PostsController < ApplicationController
     	@next = Post.where("created_at > ?", @post.created_at).first
 	end
 	def create
- 		@post = Post.new(params[:post].permit(:title, :content,:tag))
- 		puts @post
+ 		@post = Post.new(params[:post].permit(:title, :content,:tag, :auth))
  		if @post.save
  			redirect_to :root
  		else

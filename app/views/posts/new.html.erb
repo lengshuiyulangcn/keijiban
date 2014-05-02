@@ -2,9 +2,11 @@
 <%= simple_form_for(@post, :html => { :class => 'form-horizontal' }) do |f| %>
   <%= f.input :title, :input_html => { :class => "span6" }, label: '标题: '%>
   <br>
-  <%= f.input :tag, label: '分类: '%>
+  <%= f.input :tag, label: '分类: '%><br>
   <br>
   <%= f.input :content, as: :text, label: '正文: ', :input_html => { :class => "span6" }%>
   <br>
+<%= f.input :auth, :as=> :boolean,label:'是否需要登录'%>
+<br>
   <%= f.button :submit, '发布',:class =>'btn-primary'%>
 <% end %>

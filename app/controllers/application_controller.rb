@@ -25,5 +25,8 @@ class ApplicationController < ActionController::Base
   def format_date(time)
     time.strftime("%Y.%m.%d")
   end
-  helper_method :current_user,:login_needed, :is_admin, :format_date, :format_time
+  def get_tags
+	Post.pluck(:tag).uniq
+  end
+  helper_method :current_user,:login_needed, :is_admin, :format_date, :format_time, :get_tags
 end

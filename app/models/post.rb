@@ -1,6 +1,7 @@
+#require "kramdown"
 class Post < ActiveRecord::Base
 	include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :content, :title, :tag, :visit_count
+  attr_accessible :content, :title, :tag, :visit_count, :auth
   validates :title, :presence=>true, :uniqueness=> true
   validates :content, :presence=>true, :length => { :minimum=> 30 }
   validates :tag, :presence=>true
@@ -15,8 +16,12 @@ class Post < ActiveRecord::Base
     md.render(content)
   end
  def sub_content
-    HTML_Truncator.truncate(content_html, 300, length_in_chars: true)
+    HTML_Truncator.truncate(k_render, 300, length_in_chars: true)
   end
+
+   def k_render
+	Kramdown::Document.new(self.content).to_html
+   end
    def visited
     if self.visit_count==nil
         self.visit_count=0

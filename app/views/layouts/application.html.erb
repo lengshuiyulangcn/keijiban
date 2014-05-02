@@ -36,8 +36,14 @@
 
     <%= javascript_include_tag "application" %>
   </head>
-  <body　background="vendor/assets/pic/nijihaikei.jpg">
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
+  <body>
+<SCRIPT language="JavaScript">
+document.body.style.backgroundImage ="http://49.212.212.212/imagehost/image.php?di=R3D3" 
+</SCRIPT>
     <div class="navbar navbar-fluid-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -46,7 +52,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/">冷水的喵窝ε≅(◌∀◌)</a>
+          <%=link_to "冷水的喵窝ε≅(◌∀◌)", root_path, class: "brand"%>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
               <% if is_admin %>
@@ -58,9 +64,9 @@
               <li><%= link_to current_user.name %></li>
               <li><%= link_to "退出", logout_path, method: "delete" %></li>
               <%else%>
-              <li><%= link_to "登录", "/login"  %></li>
-              <li><%= link_to "注册", "/signup"  %></li>
-              <li><%= link_to "使用微博登录", "/weibologin"  %></li>
+              <li><%= link_to "登录", login_path  %></li>
+              <li><%= link_to "注册", signup_path %></li>
+              <li><%= link_to "使用微博登录(暂时不支持)", "/weibologin"  %></li>
               <%end%>
             </ul>
           </div><!--/.nav-collapse -->
@@ -74,13 +80,17 @@
           <%= yield %>
         </div>
         <div class="span2">
+	<div class="panel panel-primary">
+	<div class="panel-heading">
+         <center><h3>About</h3></center>
+	</div>
+	<div class="panel-body">
           <a href="http://49.212.212.212/imagehost/?pm=3PQB" title="QQ截图20130924221510" ><img src="http://49.212.212.212/imagehost/image.php?dm=3PQB" alt="QQ截图20130924221510" /></a>
-          <h3>About</h3>
-          <%=ENV["ABOUT"]%>
-            <h4>职业</h4>
-          <%=ENV["INTRODUCTION"]%>
+        <%=ENV["ABOUT"]%>   
+	 <h4>职业</h4>
+          <%="自然语言处理硕士2年级。社畜预备役"%>
             <h4>兴趣</h4>
-          <%=ENV["INTEREST"]%>
+          <%="学习新姿势 攻略可爱的学妹 日骑行100公里 爱情动作片 动漫相关"%>
           <h3>近期文章</h3>
           <%posts=Post.all(:order => 'created_at DESC', :limit => 10)%>
             <ul>
@@ -88,17 +98,18 @@
             <li><%=link_to p.title, post_path(p.id)%></li>
             <%end%>
           </ul>
-          <h3>分类</h3>
+          <h3>常用分类</h3>
           <ul>
-          <li><%=link_to "机器学习", "/ml"%></li>
-          <li><%=link_to "Ruby", "/ruby"%></li>
-          <li><%=link_to "闲言碎语", "/talk"%></li>
-          <li><%=link_to "关于爱情", "/love"%></li>
-        </ul>
-         
+	<%get_tags.each do |tag|%>
+          <li><%=link_to tag, tag_path(tag)%></li>
+	<%end%>
+	 </ul>
+	  <h3><%=link_to "全部内容", root_path%></h4>   
+        </div> 
         </div>
       </div>
         </div>
+	</div>
       </div><!--/row-->
     </div> <!-- /container -->
   </body>
