@@ -1,12 +1,12 @@
-<center><h3>发布新日志</h3></center>
+<center><h3>新しい投稿</h3></center>
 <%= simple_form_for(@post, :html => { :class => 'form-horizontal' }) do |f| %>
-  <%= f.input :title, :input_html => { :class => "span6" }, label: '标题: '%>
+  <%= f.input :title, :input_html => { :class => "span6" }, label: 'タイトル: '%>
   <br>
-  <%= f.input :tag, label: '分类: '%><br>
+  <%= f.input :tag, label: 'カテゴリ: '%><br>
   <br>
-  <%= f.input :content, as: :text, label: '正文: ', :input_html => { :class => "span6" }%>
+  <%= f.input :content, as: :text, label: 'コンテント: ', :input_html => { :class => "span6" }%>
   <br>
-<%= f.input :auth, :as=> :boolean,label:'是否需要登录'%>
+<%= f.input :auth, :as=> :boolean,label:'ログイン閲覧'%>
 <br>
-  <%= f.button :submit, '发布',:class =>'btn-primary'%>
+  <%= f.button :submit, '投稿',:class =>'btn-primary'%>
 <% end %>

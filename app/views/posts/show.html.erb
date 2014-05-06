@@ -1,8 +1,10 @@
 <center><h2><%=@post.title%></h2></center>
 <center>
-发布时间：
+	作者：
+	<%=User.find(@post.user_id).name%>
+投稿時間：
 <%=format_time(@post.created_at)%>
-分类：
+カテゴリ：
 <%=@post.tag%>
 </center>
 <div class="container span11">
@@ -12,21 +14,21 @@
 <%if @post.auth==0 or current_user%>
 <%=@post.content_html.html_safe%>
 <%else%>
-<h3><%=link_to "需要登录以后放可查看",login_path%></h3>
+<h3><%=link_to "ログインが必要",login_path%></h3>
 <%end%>
 <br>
-阅览人数:<%=@post.visit_count%>
+閲覧回数:<%=@post.visit_count%>
 <hr>
 <% if @prev%>
-<%=link_to "前一篇", post_path(@prev.id)%>
+<%=link_to "前の投稿", post_path(@prev.id)%>
 <%end%>
 <% if @next%>
-<%=link_to "下一篇", post_path(@next.id)%>
+<%=link_to "次の投稿", post_path(@next.id)%>
 <%end%>
 </div>
 <div class="container span8" style="background-color: #F5DEB3;">
 	<% @post.comments.each do |comment|  %>
-		<%=comment.user.name%>在<%=format_date(comment.created_at)%>发表评论:
+		<%=comment.user.name%>在<%=format_date(comment.created_at)%>コメント:
 		<br>
 		<br>
 			<%=comment.content_html.html_safe%>
@@ -35,9 +37,9 @@
 </div>
 <div class="container span11">
 <%= simple_form_for @comment do |f| %>
-  <%= f.input :content, as: :text, label: '评论内容:(支持markdown) ', :input_html => { :class => "span6" }%>
+  <%= f.input :content, as: :text, label: 'コメント:(markdown) ', :input_html => { :class => "span6" }%>
   <br>
   <%=f.input :post_id, :as => :hidden, :input_html => { :value => @post.id }%>
-  <%= f.button :submit, '提交', :class =>'btn-primary'%>
+  <%= f.button :submit, 'コメントする', :class =>'btn-primary'%>
 <% end %>
 </div>

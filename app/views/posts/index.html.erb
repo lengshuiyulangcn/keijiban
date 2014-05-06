@@ -2,8 +2,8 @@
 <%@posts.each do |p|%>
 <p>
 <%=p.title%>
-<%=link_to "编辑", edit_post_path(p.id)%>
-<%=link_to "删除", post_path(p.id), :method => :delete, :confirm => 'Are you sure?'%>
+<%=link_to "編集", edit_post_path(p.id)%>
+<%=link_to "削除", post_path(p.id), :method => :delete, :confirm => 'Are you sure?'%>
 </p>
 <%end%>
 </div>

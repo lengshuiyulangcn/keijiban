@@ -2,24 +2,26 @@
 <%@posts.each do |p|%>
 <div class="container-fluid span11" style="background-color: #F5DEB3;">
 <h3><%=link_to p.title, post_path(p.id)%></h3>
-发表于:<%=format_time(p.created_at)%>
+投稿時間:<%=format_time(p.created_at)%>
 <br>
 <br>
 <br>
 <%if p.auth==0 or current_user%>
 <%=p.sub_content.html_safe%>
 <%else%>
-<%=link_to "需要登录后才能查看",login_path%>
+<%=link_to "ログインしてから閲覧可能",login_path%>
 <%end%>
 <br>
-发表在:<%=link_to p.tag, tag_path(p.tag)%>
+作者:
+	<%=User.find(p.user_id).name%>
+カテゴリ:<%=link_to p.tag, tag_path(p.tag)%>
 <br>
-阅览人数:<%=p.visit_count%>
+閲覧回数:<%=p.visit_count%>
 <br>
-<%=link_to "阅读全文 >>", post_path(p.id)%>
+<%=link_to "続きを読む >>", post_path(p.id)%>
 <hr>
 </div>
 <%end%>
 <div class="container-fluid span11" style="background-color: #F5DEB3;">
-<%=link_to "查看全部", "/total"%>
+<%=link_to "すべての投稿", "/total"%>
 </div>

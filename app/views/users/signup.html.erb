@@ -1,11 +1,11 @@
 <div class="single-form-container">
   <%= form_for @user do |f| %>
     <div class="boxed-group">
-      <h3>注册</h3>
+      <h3>ユザー登録</h3>
       <div class="boxed-group-inner">
         <% if @user.errors.any? %>
           <div class="form_errorred">
-            填写的信息有误
+            入力が間違った
           </div>
         <% end %>
         <dl class="form">
@@ -26,7 +26,7 @@
           <dt> <%= f.label :password_confirmation %> </dt>
           <dd> <%= f.password_field :password_confirmation %> </dd>
         </dl>
-        <p><%= f.submit "注册", :class => "button primary" %></p>
+        <p><%= f.submit "登録", :class => "button primary" %></p>
       </div>
     </div>
   <% end %>

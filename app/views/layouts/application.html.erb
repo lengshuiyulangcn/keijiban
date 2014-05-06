@@ -41,9 +41,6 @@
 </script>
 
   <body>
-<SCRIPT language="JavaScript">
-document.body.style.backgroundImage ="http://49.212.212.212/imagehost/image.php?di=R3D3" 
-</SCRIPT>
     <div class="navbar navbar-fluid-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -52,21 +49,18 @@ document.body.style.backgroundImage ="http://49.212.212.212/imagehost/image.php?
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <%=link_to "冷水的喵窝ε≅(◌∀◌)", root_path, class: "brand"%>
+          <%=link_to "外山研究室電子掲示板", root_path, class: "brand"%>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
-              <% if is_admin %>
+              <% if current_user %>
                 <li><%= link_to current_user.name %></li>
-                <li><%=link_to "写日志",new_post_path%></li>
-                <li><%=link_to "日志管理",posts_path%></li>
-                <li><%= link_to "退出", logout_path, method: "delete" %></li>
-              <%elsif current_user%>
-              <li><%= link_to current_user.name %></li>
-              <li><%= link_to "退出", logout_path, method: "delete" %></li>
+                <li><%=link_to "投稿",new_post_path%></li>
+                <li><%=link_to "投稿履歴",posts_path%></li>
+                <li><%= link_to "ログアウト", logout_path, method: "delete" %></li>
               <%else%>
-              <li><%= link_to "登录", login_path  %></li>
-              <li><%= link_to "注册", signup_path %></li>
-              <li><%= link_to "使用微博登录(暂时不支持)", "/weibologin"  %></li>
+              <li><%= link_to "ログイン", login_path  %></li>
+              <li><%= link_to "ユーザ登録", signup_path %></li>
+              <li><%= link_to "ツイーターIDでログイン（未完成）", "/weibologin"  %></li>
               <%end%>
             </ul>
           </div><!--/.nav-collapse -->
@@ -85,26 +79,26 @@ document.body.style.backgroundImage ="http://49.212.212.212/imagehost/image.php?
          <center><h3>About</h3></center>
 	</div>
 	<div class="panel-body">
-          <a href="http://49.212.212.212/imagehost/?pm=3PQB" title="QQ截图20130924221510" ><img src="http://49.212.212.212/imagehost/image.php?dm=3PQB" alt="QQ截图20130924221510" /></a>
+          <a href="http://imgur.com/CznrdVj.png" title="筒隠月子" ><img src="http://imgur.com/CznrdVj.png" alt="あれあれ？" /></a>
         <%=ENV["ABOUT"]%>   
-	 <h4>职业</h4>
-          <%="自然语言处理硕士2年级。社畜预备役"%>
-            <h4>兴趣</h4>
-          <%="学习新姿势 攻略可爱的学妹 日骑行100公里 爱情动作片 动漫相关"%>
-          <h3>近期文章</h3>
+	 <h4>説明</h4>
+          <%="研究室内部情報共有ため掲示板"%>
+            <h4>管理人</h4>
+          <%=""%>
+          <h3>最近の投稿</h3>
           <%posts=Post.all(:order => 'created_at DESC', :limit => 10)%>
             <ul>
             <%posts.each do |p|%>
             <li><%=link_to p.title, post_path(p.id)%></li>
             <%end%>
           </ul>
-          <h3>常用分类</h3>
+          <h3>カテゴリ別</h3>
           <ul>
 	<%get_tags.each do |tag|%>
           <li><%=link_to tag, tag_path(tag)%></li>
 	<%end%>
 	 </ul>
-	  <h3><%=link_to "全部内容", root_path%></h4>   
+	  <h3><%=link_to "すべての投稿", root_path%></h4>   
         </div> 
         </div>
       </div>

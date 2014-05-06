@@ -9,9 +9,9 @@ class UsersController < ApplicationController
       @tag = tag
     elsif params[:type]=="total"
       @posts=Post.all
-      @tag="全部日志"
+      @tag="全部の投稿"
     else
-      @tag="最近发表"
+      @tag="最近の投稿"
       @posts
     end
   end

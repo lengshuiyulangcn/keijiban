@@ -1,12 +1,12 @@
-<center><h3>编辑日志</h3></center>
+<center><h3>投稿を再編集</h3></center>
 <%= simple_form_for(@post, :html => { :class => 'form-horizontal' }) do |f| %>
-  <%= f.input :title, :input_html => { :class => "span6" }, label: '标题: '%>
+  <%= f.input :title, :input_html => { :class => "span6" }, label: 'タイトル: '%>
   <br>
-  <%= f.input :tag, label: '分类: '%>
+  <%= f.input :tag, label: 'カテゴリ: '%>
   <br>
-  <%= f.input :content, as: :text, label: '正文: ', :input_html => { :class => "span6" }%>
+  <%= f.input :content, as: :text, label: 'コンテント: ', :input_html => { :class => "span6" }%>
   <br>
-<%= f.input :auth, :as=> :boolean, :value=>1, label:'是否需要登录'%>
+<%= f.input :auth, :as=> :boolean, :value=>1, label:'ユーザログイン必要'%>
   <br>
-  <%= f.button :submit, '提交', :class =>'btn-primary'%>
+  <%= f.button :submit, '投稿', :class =>'btn-primary'%>
 <% end %>

@@ -3,8 +3,10 @@ class PostsController < ApplicationController
 	def index
 		if is_admin
 			@posts=Post.all
+		elsif current_user
+			@posts=Post.find(:all, :conditions => { :user_id => current_user.id })
 		else
-			flash[:error]="非管理员无法进行上述操作"
+			flash[:error]="管理人権限が必要"
 			redirect_to :root
 		end
 	end
@@ -14,10 +16,10 @@ class PostsController < ApplicationController
 	def update
 		@post = Post.find( params[:id] )
 		if @post.update_attributes(params[:post].permit(:title,:content,:tag,:auth))
-      	flash[:notice] = '更新博客成功'
+      	flash[:notice] = '更新成功'
       	redirect_to :root
     	else
-      	flash[:error] = '更新博客失败'
+      	flash[:error] = '更新失敗'
       	render :edit
     	end
 	end
@@ -31,6 +33,7 @@ class PostsController < ApplicationController
 	end
 	def create
  		@post = Post.new(params[:post].permit(:title, :content,:tag, :auth))
+ 		@post.user_id=current_user.id
  		if @post.save
  			redirect_to :root
  		else
@@ -44,7 +47,7 @@ class PostsController < ApplicationController
 	def destroy
 		@post=Post.find(params[:id])
 		if @post.delete
-			flash[:notice]="删除日志成功"
+			flash[:notice]="削除成功"
 		redirect_to :root
 		end
 	end

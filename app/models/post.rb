@@ -6,6 +6,7 @@ class Post < ActiveRecord::Base
   validates :content, :presence=>true, :length => { :minimum=> 30 }
   validates :tag, :presence=>true
   has_many :comments
+  belongs_to :users
   # :inclusion => { :in => [ TECH, LIFE, CREATOR ] }
   def content_html
     self.class.render_html(self.content)
